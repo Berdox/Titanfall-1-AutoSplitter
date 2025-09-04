@@ -6,8 +6,6 @@ A LiveSplit AutoSplitter for **Titanfall 1** speedrun categories.
 
 ## Features
 
----
-
 - **Start**
   - Supports **100%**, **Pilot**, and **Titan Training** categories.  
   - **100% Training**: Timer starts after pressing `R` to begin Training.  
