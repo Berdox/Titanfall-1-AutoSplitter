@@ -88,7 +88,7 @@ start {
     bool started = false;
     if (settings["cat100"]) { // 100% Training
         print("100% Training Start");
-        started = (vars.prevTraining100StartValue == 1063675494) && (current.Training100StartValue == 1056964608);
+        started = (current.Training100StartValue == 1056964608 && vars.prevTraining100StartValue == 1063675494);
     }
     else if (settings["catPilot"]) { // Pilot
         print("Pilot Training Start");
@@ -106,11 +106,10 @@ start {
 
 reset {
     // Values at the main menu that to splitter looks for to reset
-    if(current.resetValue == 4096 &&
+    if (current.resetValue  == 4096  &&
         current.resetValue2 == 27136 &&
         current.resetValue3 == 22784 &&
-        current.resetValue4 == 13439) 
-        {
-            return true;
-        }
+        current.resetValue4 == 13439) {
+        return true;
+    }
 }
