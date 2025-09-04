@@ -18,7 +18,7 @@ state("Titanfall") {
 }
 
 startup {
-    print(" -------------------- TF1 Autosplitter starting -------------------- ");
+    print(" -------------------- TF1 Autosplitter Starting Up -------------------- ");
 
     // Variables
     vars.prevIndex = -1;
@@ -29,7 +29,7 @@ startup {
     vars.FINAL_TRAINING_INDEX = 13;
     vars.PILOT_FINAL_TRAINING_INDEX = 9;
 
-    // --- Category selection using parent-child settings ---
+    // Category selection using parent-child settings
     settings.Add("category", true, "Select Category (choose one)");
     settings.SetToolTip("category", "Pick exactly one category for this run.");
 
@@ -54,21 +54,19 @@ update {
 
 split {
     bool shouldSplit = false;
-    int category = 0; // default = 100% Training
 
-    if (settings["cat100"]) category = 0;
-    else if (settings["catPilot"]) category = 1;
-    else if (settings["catTitan"]) category = 2;
-
-    if (category == 0) { // 100% Training
+    if (settings["cat100"]) { // 100% Training
+        print("100% Training Split");
         bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
         shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevIndex);
     }
-    else if (category == 1) { // Pilot
+    else if (settings["catPilot"]) { // Pilot
+        print("Pilot Training Split");
         bool isFinalSplit = (current.levelIndex == vars.PILOT_FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
         shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevIndex);
     }
-    else if (category == 2) { // Titan
+    else if (settings["catTitan"]) { // Titan
+        print("Titan Training Split");
         bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
         shouldSplit = isFinalSplit || (current.levelIndex > 10 && current.levelIndex > vars.prevIndex);
     }
@@ -107,6 +105,7 @@ start {
 }
 
 reset {
+    // Values at the main menu that to splitter looks for to reset
     if(current.resetValue == 4096 &&
         current.resetValue2 == 27136 &&
         current.resetValue3 == 22784 &&
