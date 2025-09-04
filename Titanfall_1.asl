@@ -80,7 +80,7 @@ split {
         return true;
     }
 
-    return shouldSplit;
+    return false;
 }
 
 start {
