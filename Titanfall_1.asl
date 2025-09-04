@@ -1,5 +1,6 @@
 state("Titanfall") {
-    // Gets the Training level index. The first one is the correct level index and the second is related to the level index which is used to trigger the final split.
+    // Gets the Training level index. The first one is the correct level index and 
+    // the second one is related to the level index which is used to trigger the final split.
     int levelIndex : "client.dll", 0x16BC71C;
     int levelIndexPointer : "client.dll", 0x00AD1D48, 0x28, 0xC0, 0xB8, 0xF0, 0x68, 0x40, 0x8;
 
@@ -105,7 +106,7 @@ start {
 }
 
 reset {
-    // Values at the main menu that to splitter looks for to reset
+    // Values at the main menu that the auto splitter looks for to reset
     if (current.resetValue  == 4096  &&
         current.resetValue2 == 27136 &&
         current.resetValue3 == 22784 &&
