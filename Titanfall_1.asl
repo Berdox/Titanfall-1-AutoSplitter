@@ -9,6 +9,12 @@ state("Titanfall") {
     // pilot and titan starting values
     int pilotTitanTrainingStartValue : "engine.dll", 0x2EB6B80;
 
+    // Four Reset values so false positive don't happen
+    int resetValue : "engine.dll", 0x229F5D0; //  4096
+    int resetValue2 : "engine.dll", 0x229EE94; // 27136
+    int resetValue3 : "engine.dll", 0x229F4EC; // 22784
+    int resetValue4 : "engine.dll", 0x229EE8C; // 13439
+
 }
 
 startup {
@@ -98,4 +104,14 @@ start {
     vars.prevTraining100StartValue = current.Training100StartValue;
     vars.prevPilotTitanTrainingStartValue = current.pilotTitanTrainingStartValue; 
     return started;
+}
+
+reset {
+    if(current.resetValue == 4096 &&
+        current.resetValue2 == 27136 &&
+        current.resetValue3 == 22784 &&
+        current.resetValue4 == 13439) 
+        {
+            return true;
+        }
 }
