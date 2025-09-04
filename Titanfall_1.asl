@@ -57,17 +57,17 @@ split {
     bool shouldSplit = false;
 
     if (settings["cat100"]) { // 100% Training
-        print("100% Training Split");
+        //print("100% Training Split");
         bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
         shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevIndex);
     }
     else if (settings["catPilot"]) { // Pilot
-        print("Pilot Training Split");
+        //print("Pilot Training Split");
         bool isFinalSplit = (current.levelIndex == vars.PILOT_FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
         shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevIndex);
     }
     else if (settings["catTitan"]) { // Titan
-        print("Titan Training Split");
+        //print("Titan Training Split");
         bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
         shouldSplit = isFinalSplit || (current.levelIndex > 10 && current.levelIndex > vars.prevIndex);
     }
@@ -88,15 +88,15 @@ split {
 start {
     bool started = false;
     if (settings["cat100"]) { // 100% Training
-        print("100% Training Start");
+        //print("100% Training Start");
         started = (current.Training100StartValue == 1056964608 && vars.prevTraining100StartValue == 1063675494);
     }
     else if (settings["catPilot"]) { // Pilot
-        print("Pilot Training Start");
+        //print("Pilot Training Start");
         started = (current.pilotTitanTrainingStartValue == 858595429 && vars.prevPilotTitanTrainingStartValue == 1935635566);
     }
     else if (settings["catTitan"]) { // Titan
-        print("Titan Training Start");
+        //print("Titan Training Start");
         started = (current.pilotTitanTrainingStartValue == 875372645 && vars.prevPilotTitanTrainingStartValue == 1935635566);
     } 
 
