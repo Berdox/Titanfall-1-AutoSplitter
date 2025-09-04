@@ -22,7 +22,7 @@ startup {
     print(" -------------------- TF1 Autosplitter Starting Up -------------------- ");
 
     // Variables
-    vars.prevIndex = -1;
+    vars.prevLevelIndex = -1;
     vars.prevTraining100StartValue = -1;
     vars.prevPilotTitanTrainingStartValue = -1;
 
@@ -46,6 +46,7 @@ init {
 update {
     // Levels
     //print("Level Index: " + current.levelIndex);
+    //print("Level Pre-Index: " + vars.prevLevelIndex);
     //print("Level Index Pointer: " + current.levelIndexPointer);
 
     // Start values
@@ -56,33 +57,30 @@ update {
 split {
     bool shouldSplit = false;
 
+    // check for split
     if (settings["cat100"]) { // 100% Training
-        //print("100% Training Split");
-        bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
-        shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevIndex);
+        bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) &&
+                            (current.levelIndexPointer == -2);
+        shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevLevelIndex);
     }
     else if (settings["catPilot"]) { // Pilot
-        //print("Pilot Training Split");
-        bool isFinalSplit = (current.levelIndex == vars.PILOT_FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
-        shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevIndex);
+        bool isFinalSplit = (current.levelIndex == vars.PILOT_FINAL_TRAINING_INDEX) &&
+                            (current.levelIndexPointer == -2);
+        shouldSplit = isFinalSplit || (current.levelIndex > 0 && current.levelIndex > vars.prevLevelIndex);
     }
     else if (settings["catTitan"]) { // Titan
-        //print("Titan Training Split");
-        bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) && (current.levelIndexPointer == -2);
-        shouldSplit = isFinalSplit || (current.levelIndex > 10 && current.levelIndex > vars.prevIndex);
+        bool isFinalSplit = (current.levelIndex == vars.FINAL_TRAINING_INDEX) &&
+                           (current.levelIndexPointer == -2);
+        shouldSplit = isFinalSplit || (current.levelIndex > 10 && current.levelIndex > vars.prevLevelIndex);
     }
 
+    // update prevLevelIndex after split
     if (shouldSplit) {
-        vars.prevIndex = current.levelIndex;
+        vars.prevLevelIndex = current.levelIndex;
         return true;
     }
 
-    // update prevIndex
-    if (current.levelIndex > vars.prevIndex) {
-        vars.prevIndex = current.levelIndex;
-    }
-
-    return false;
+    return shouldSplit;
 }
 
 start {
@@ -90,14 +88,20 @@ start {
     if (settings["cat100"]) { // 100% Training
         //print("100% Training Start");
         started = (current.Training100StartValue == 1056964608 && vars.prevTraining100StartValue == 1063675494);
+        //Sets the value of preLevelIndex for the splits
+        if (started) vars.prevLevelIndex = 0;
     }
     else if (settings["catPilot"]) { // Pilot
         //print("Pilot Training Start");
         started = (current.pilotTitanTrainingStartValue == 858595429 && vars.prevPilotTitanTrainingStartValue == 1935635566);
+        //Sets the value of preLevelIndex for the splits
+        if (started) vars.prevLevelIndex = 0;
     }
     else if (settings["catTitan"]) { // Titan
         //print("Titan Training Start");
         started = (current.pilotTitanTrainingStartValue == 875372645 && vars.prevPilotTitanTrainingStartValue == 1935635566);
+        //Sets the value of preLevelIndex for the splits
+        if (started) vars.prevLevelIndex = 10;
     } 
 
     vars.prevTraining100StartValue = current.Training100StartValue;
