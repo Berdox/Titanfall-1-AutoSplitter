@@ -1,2 +1,20 @@
-# Titanfall-1-AutoSplitter
-A livesplit AutoSplitter used for Titanfall 1 speedrun categories.
+# Titanfall 1 AutoSplitter
+
+A LiveSplit AutoSplitter for **Titanfall 1** speedrun categories.
+
+---
+
+## Features
+
+---
+
+- **Start**
+  - Supports **100%**, **Pilot**, and **Titan Training** categories.  
+  - **100% Training**: Timer starts after pressing `R` to begin Training.  
+  - **Pilot / Titan Training**: Timer starts as soon as you load in.  
+
+- **Splits**
+  - Automatically splits for all levels in **100%**, **Pilot**, and **Titan Training**.  
+
+- **Reset**
+  - Automatically resets when returning to the main menu on failed runs.  
