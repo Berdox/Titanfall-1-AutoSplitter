@@ -16,7 +16,7 @@ A LiveSplit AutoSplitter for **Titanfall 1** speedrun categories.
 
 - **Stops**
   - Supports **100%**, **Pilot**, and **Titan Training** categories.
-  - Stops Timer at end of run for The support categories.
+  - Stops timer at end of run for the support categories.
 
 - **Reset**
   - Automatically resets when returning to the main menu on failed runs.  
